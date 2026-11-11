@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Specijalizacije – moj pratitelj</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f766e">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Specijalizacije">
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--ink:#1b2430;--muted:#667085;--line:#e3e7ec;--brand:#0f766e;--brand-ink:#fff;--brand-soft:#e3f4f1;--warn:#b45309;--warn-soft:#fef3c7;--bad:#b42318;--bad-soft:#fee4e2;--ok:#067647;--ok-soft:#dcfae6;--chip:#eef2f6;--shadow:0 1px 2px rgba(16,24,40,.06)}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1318;--card:#161d25;--ink:#e6eaf0;--muted:#98a2b3;--line:#27313c;--brand:#2dd4bf;--brand-ink:#04211e;--brand-soft:#0f2e2b;--warn:#fbbf24;--warn-soft:#3a2d0b;--bad:#f97066;--bad-soft:#3b1512;--ok:#47cd89;--ok-soft:#0e2e1d;--chip:#212b36;--shadow:none}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.top{max-width:1100px;margin:0 auto;padding:10px 16px 0;display:flex;align-items:center;gap:12px;justify-content:space-between}
+.logo{font-weight:700;font-size:18px;letter-spacing:-.01em}
+.logo span{color:var(--brand)}
+nav{max-width:1100px;margin:0 auto;display:flex;gap:2px;overflow-x:auto;padding:0 10px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);padding:10px 12px;font:inherit;font-weight:600;cursor:pointer;white-space:nowrap}
+nav button:hover{color:var(--ink)}
+nav button.on{color:var(--brand);border-bottom-color:var(--brand)}
+main{max-width:1100px;margin:0 auto;padding:18px 16px 80px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:0 0 10px}h3{font-size:15.5px;margin:0}
+.muted{color:var(--muted)}.small{font-size:13px}.right{text-align:right}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between;align-items:flex-start}
+.grid{display:grid;gap:12px}.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.stat .v{font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.stat .l{color:var(--muted);font-size:13px}
+.btn{background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer}
+.btn:hover{filter:brightness(1.07)}
+.btn.sec{background:var(--chip);color:var(--ink)}
+.btn.bad{background:var(--bad-soft);color:var(--bad)}
+.btn.sm{padding:4px 10px;font-size:13px}
+a.btn{text-decoration:none;display:inline-block}
+a{color:var(--brand)}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 10px;width:100%}
+input[type=checkbox]{width:auto}
+textarea{min-height:70px;resize:vertical}
+label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:3px}
+.f{margin-bottom:10px}.f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.f3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:560px){.f2,.f3{grid-template-columns:1fr}}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--chip);color:var(--muted)}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}.tag.warn{background:var(--warn-soft);color:var(--warn)}.tag.bad{background:var(--bad-soft);color:var(--bad)}.tag.bell{background:var(--brand-soft);color:var(--brand)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{background:var(--chip);border-radius:99px;padding:4px 12px;font-size:13px;text-decoration:none;color:var(--ink);border:0;cursor:pointer;font-family:inherit}
+.chip:hover{background:var(--brand-soft);color:var(--brand)}
+.chip.on{background:var(--brand);color:var(--brand-ink)}
+.list{display:grid;gap:10px}
+.item .meta{display:flex;gap:6px 14px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin:6px 0}
+.item .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.item select.st{width:auto;padding:3px 8px;font-size:13px}
+.banner{border-radius:10px;padding:10px 14px;margin-bottom:14px;background:var(--warn-soft);color:var(--warn);font-weight:500}
+.banner.bad{background:var(--bad-soft);color:var(--bad)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto}
+.total{font-size:34px;font-weight:800;color:var(--brand);letter-spacing:-.02em}
+.sticky{position:sticky;top:104px;align-self:start}
+.pos{color:var(--ok);font-weight:600}.neg{color:var(--bad);font-weight:600}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+.toolbar input,.toolbar select{width:auto;min-width:130px;flex:1}
+dialog{border:1px solid var(--line);border-radius:14px;padding:0;background:var(--card);color:var(--ink);width:min(640px,94vw);max-height:92vh}
+dialog::backdrop{background:rgba(10,15,20,.55)}
+dialog form{padding:18px;overflow:auto;max-height:92vh}
+.empty{text-align:center;padding:30px 16px;color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:99px;font-weight:600;z-index:99;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+.check{display:flex;gap:8px;align-items:flex-start;padding:6px 0}
+.check input{margin-top:5px}
+.check.done span{text-decoration:line-through;color:var(--muted)}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 36px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:24px;height:24px;border-radius:50%;background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:13px;display:grid;place-items:center}
+.calcgrid{grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:16px}
+@media(max-width:820px){.calcgrid{grid-template-columns:1fr}.sticky{position:static}}
+.ruletbl input{padding:4px 6px;width:80px;text-align:right}
+</style>
+</head>
+<body>
+<header>
+  <div class="top"><div class="logo">Spec<span>ijalizacije</span> <span class="muted small" style="font-weight:500;color:var(--muted)">· osobni pratitelj</span></div><div class="small muted" id="savedAt"></div></div>
+  <nav id="nav"></nav>
+</header>
+<main id="view"></main>
+<dialog id="dlg"><form method="dialog" id="dlgForm"></form></dialog>
+<div class="toast" id="toast"></div>
+
+<datalist id="dlSpec"></datalist>
+<datalist id="dlHosp"></datalist>
+
+<script>
+'use strict';
+/* ====================== Konstante ====================== */
+const LS_KEY = 'specijalizacije.v1';
+const SPEC_LIST = ['Abdominalna kirurgija','Alergologija i klinička imunologija','Anesteziologija, reanimatologija i intenzivna medicina','Dermatologija i venerologija','Dječja i adolescentna psihijatrija','Dječja kirurgija','Endokrinologija i dijabetologija','Epidemiologija','Fizikalna medicina i rehabilitacija','Gastroenterologija','Gerijatrija','Ginekologija i opstetricija','Hematologija','Hitna medicina','Infektologija','Internistička onkologija','Javnozdravstvena medicina','Kardiologija','Kardiotorakalna kirurgija','Klinička farmakologija s toksikologijom','Klinička mikrobiologija','Klinička radiologija','Laboratorijska imunologija','Maksilofacijalna kirurgija','Medicina rada i sporta','Medicinska genetika','Nefrologija','Neurokirurgija','Neurologija','Nuklearna medicina','Obiteljska medicina','Oftalmologija i optometrija','Onkologija i radioterapija','Opća interna medicina','Opća kirurgija','Ortopedija i traumatologija','Otorinolaringologija','Patologija i citologija','Pedijatrija','Plastična, rekonstrukcijska i estetska kirurgija','Pulmologija','Psihijatrija','Reumatologija','Školska i adolescentna medicina','Sudska medicina','Torakalna kirurgija','Transfuzijska medicina','Urologija','Vaskularna kirurgija'];
+const ZUPANIJE = ['Bjelovarsko-bilogorska','Brodsko-posavska','Dubrovačko-neretvanska','Grad Zagreb','Istarska','Karlovačka','Koprivničko-križevačka','Krapinsko-zagorska','Ličko-senjska','Međimurska','Osječko-baranjska','Požeško-slavonska','Primorsko-goranska','Sisačko-moslavačka','Splitsko-dalmatinska','Šibensko-kninska','Varaždinska','Virovitičko-podravska','Vukovarsko-srijemska','Zadarska','Zagrebačka'];
+const HOSP = {'KBC Zagreb':'Grad Zagreb','KB Dubrava':'Grad Zagreb','KBC Sestre milosrdnice':'Grad Zagreb','KB Merkur':'Grad Zagreb','KB Sveti Duh':'Grad Zagreb','Klinika za infektivne bolesti "Dr. Fran Mihaljević"':'Grad Zagreb','Klinika za dječje bolesti Zagreb':'Grad Zagreb','Psihijatrijska bolnica Vrapče':'Grad Zagreb','KBC Split':'Splitsko-dalmatinska','KBC Rijeka':'Primorsko-goranska','KBC Osijek':'Osječko-baranjska','OB Varaždin':'Varaždinska','OB Pula':'Istarska','OB Zadar':'Zadarska','OB Dubrovnik':'Dubrovačko-neretvanska','OB Šibenik':'Šibensko-kninska','OB Karlovac':'Karlovačka','OB Sisak':'Sisačko-moslavačka','OB Bjelovar':'Bjelovarsko-bilogorska','OB Čakovec':'Međimurska','OB Koprivnica':'Koprivničko-križevačka','OB Slavonski Brod':'Brodsko-posavska','OB Vinkovci':'Vukovarsko-srijemska','OB Vukovar':'Vukovarsko-srijemska','OB Virovitica':'Virovitičko-podravska','OB Požega':'Požeško-slavonska','OB Gospić':'Ličko-senjska','OB Zabok':'Krapinsko-zagorska'};
+const STATUSI = {prati:['Pratim','tag'],prijavljen:['Prijavljen','tag warn'],razgovor:['Poziv na razgovor','tag warn'],primljen:['Primljen','tag ok'],nije:['Nisam primljen','tag bad'],ponisten:['Poništen','tag bad']};
+const EDU_TIP = ['Kongres','Studentski kongres','Tečaj','E-akademija HLK','Webinar','Ostalo'];
+const EDU_ST = {zanima:'Zanima me',prijavljen:'Prijavljen',odslusano:'Odslušano / sudjelovao',odbaceno:'Odbačeno'};
+const LIT_IZVOR = ['PubMed','HRČAK / hrvatski časopis','HZJZ','HALMED','ECDC','WHO','HLK','Strane smjernice','Ostalo'];
+const LIT_TIP = ['Članak','Smjernica','Pregled / vijest','Ostalo'];
+const RAZGOVOR_KAT = ['Opća medicinska znanja','Znanja i vještine specifične za specijalizaciju','Motiviranost','Kvaliteta socijalnog kontakta (verbalna i neverbalna komunikacija)','Profesionalna prezentacija i argumentacija'];
+const CHECKLIST = ['Diploma integriranog studija','Odobrenje za samostalan rad (licenca)','Potvrda o položenim ispitima s ocjenama (prijepis)','Potvrda o težinskom prosjeku i trajanju studija','Preslike nagrada rektora / dekana','Potvrda o statusu poslijediplomskog doktorskog studija','Popis radova s preslikama i potvrdom o indeksiranosti','Dokazi o radnom iskustvu (potvrde poslodavca, HZZO/HZMO, ugovori)','Potvrda o znanstveno-nastavnom radu (ako postoji)','Domovnica / osobna iskaznica (preslika)'];
+
+const DEFAULT_RULES = {
+  studij:{perYear:1, extPenalty:1},
+  nagrade:{per:1, max:4},
+  phd:{upis:0.5, god2:1.5, god3:3, doktorat:7, max:7},
+  radovi:{idxFirst:1, idxCo:0.5, nonIdxFirst:0.3, nonIdxCo:0.1, max:8},
+  razgovor:{maxCat:6},
+  rad:[
+    {id:'opca', naziv:'Obiteljska/opća medicina (javna mreža), izvanbolnička hitna medicina ili OHBP', mj:1.1, max:40, t6:8, t12:18},
+    {id:'mobilna', naziv:'Obiteljska medicina – mobilna ambulanta doma zdravlja', mj:1.2, max:4, t6:9, t12:20},
+    {id:'turisti', naziv:'Turistička ambulanta doma zdravlja / dodatni tim za turiste', mj:1.1, max:null, t6:null, t12:null},
+    {id:'otoci', naziv:'Otoci, ispodprosječno razvijeno, brdsko-planinsko područje ili Program mjera za doktore bez specijalizacije', mj:1.3, max:null, t6:10, t12:22},
+    {id:'drugo', naziv:'Drugo radno iskustvo u struci u javnom sustavu (provjeri!)', mj:0.9, max:null, t6:null, t12:null},
+    {id:'nastava', naziv:'Znanstveno-nastavni rad na medicinskom fakultetu', mj:0.5, max:4, t6:null, t12:null}
+  ]
+};
+const clone = o => JSON.parse(JSON.stringify(o));
+const defaults = () => ({
+  v:1, natjecaji:[], lit:[], edu:[], checklist:{}, lastNotified:'', feed:{dismissed:[], added:{}, seen:[], lastSync:''},
+  alarms:{specs:[], zupanije:[], days:7},
+  rules:clone(DEFAULT_RULES),
+  profile:{studijGod:6, produzenje:0, prosjek:'', nagrade:0, phd:'none', radovi:{idxFirst:0, idxCo:0, nonIdxFirst:0, nonIdxCo:0}, rad:[], razgovor:[0,0,0,0,0]}
+});
+
+/* ====================== Pomoćne ====================== */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid = () => Math.random().toString(36).slice(2, 10);
+const pad = n => String(n).padStart(2, '0');
+const isoOf = d => d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());
+const todayISO = () => isoOf(new Date());
+const fmtDate = iso => iso ? iso.split('-').reverse().join('.') + '.' : '';
+const daysUntil = iso => Math.round((new Date(iso+'T00:00:00') - new Date(todayISO()+'T00:00:00')) / 864e5);
+const norm = s => String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'d').toLowerCase().trim();
+const num = v => { if (v === '' || v == null) return null; const x = parseFloat(String(v).replace(',', '.')); return isNaN(x) ? null : x; };
+const r2 = x => Math.round((x + Number.EPSILON) * 100) / 100;
+const fmtN = x => (x == null || isNaN(x)) ? '–' : String(r2(x)).replace('.', ',');
+const avg = a => { const v = a.filter(x => x != null); return v.length ? v.reduce((s, x) => s + x, 0) / v.length : null; };
+const getPath = (o, p) => p.split('.').reduce((a, k) => a[k], o);
+const setPath = (o, p, v) => { const k = p.split('.'); const l = k.pop(); k.reduce((a, x) => a[x], o)[l] = v; };
+const gsearch = q => 'https://www.google.com/search?q=' + encodeURIComponent(q);
+
+let S = load();
+function load(){
+  try {
+    const j = JSON.parse(localStorage.getItem(LS_KEY));
+    if (j && typeof j === 'object') {
+      const d = defaults();
+      const m = Object.assign(d, j);
+      m.profile = Object.assign(d.profile, j.profile || {});
+      m.profile.radovi = Object.assign(defaults().profile.radovi, (j.profile||{}).radovi || {});
+      m.alarms = Object.assign(defaults().alarms, j.alarms || {});
+      m.feed = Object.assign(defaults().feed, j.feed || {});
+      if (!m.rules || !Array.isArray(m.rules.rad)) m.rules = clone(DEFAULT_RULES);
+      return m;
+    }
+  } catch (e) {}
+  return defaults();
+}
+let storageOK = true;
+function save(){
+  try { localStorage.setItem(LS_KEY, JSON.stringify(S)); storageOK = true; $('#savedAt').textContent = 'Spremljeno ' + new Date().toLocaleTimeString('hr-HR', {hour:'2-digit', minute:'2-digit'}); }
+  catch (e) { storageOK = false; $('#savedAt').textContent = '⚠ Spremanje nije uspjelo – izvezi sigurnosnu kopiju'; }
+}
+let toastT;
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2400); }
+
+/* ====================== Kalkulator bodova ====================== */
+function workPts(c, months, kont){
+  const lin = months * c.mj;
+  if (!kont) return lin;
+  let tier = 0;
+  if (c.t12 != null && months >= 12) tier = c.t12 + (months - 12) * c.mj;
+  else if (c.t6 != null && months >= 6) tier = c.t6 + (months - 6) * c.mj;
+  return Math.max(lin, tier);
+}
+function calc(p, R){
+  const rows = [];
+  const add = (label, pts, note) => rows.push({label, pts, note});
+  const god = Number(p.studijGod) || 0, ext = Number(p.produzenje) || 0;
+  add('Trajanje studija', god * R.studij.perYear - ext * R.studij.extPenalty,
+      god + ' god. × ' + fmtN(R.studij.perYear) + (ext ? ' − ' + ext + ' god. produžetka × ' + fmtN(R.studij.extPenalty) : ''));
+  const pr = num(p.prosjek);
+  add('Težinski prosjek ocjena', pr == null ? 0 : r2(pr), pr == null ? 'upiši prosjek' : 'bodovi = prosjek (2 decimale)');
+  const nag = Math.min((Number(p.nagrade) || 0) * R.nagrade.per, R.nagrade.max);
+  add('Nagrade rektora / dekana', nag, (Number(p.nagrade)||0) + ' × ' + fmtN(R.nagrade.per) + ' (najviše ' + fmtN(R.nagrade.max) + ')');
+  const phdMap = {none:0, upis:R.phd.upis, god2:R.phd.god2, god3:R.phd.god3, doktorat:R.phd.doktorat};
+  add('Poslijediplomski doktorski studij', Math.min(phdMap[p.phd] || 0, R.phd.max), 'najviše ' + fmtN(R.phd.max));
+  const rv = p.radovi, rr = R.radovi;
+  const radSum = (+rv.idxFirst||0)*rr.idxFirst + (+rv.idxCo||0)*rr.idxCo + (+rv.nonIdxFirst||0)*rr.nonIdxFirst + (+rv.nonIdxCo||0)*rr.nonIdxCo;
+  add('Stručna i znanstvena aktivnost', Math.min(radSum, rr.max), 'zbroj ' + fmtN(radSum) + ', najviše ' + fmtN(rr.max));
+  R.rad.forEach(c => {
+    const ent = p.rad.filter(e => e.cat === c.id);
+    if (!ent.length) return;
+    let s = 0, mons = 0;
+    ent.forEach(e => { const m = Number(e.mj) || 0; mons += m; s += workPts(c, m, e.kont); });
+    const capped = c.max != null ? Math.min(s, c.max) : s;
+    add('Rad: ' + c.naziv.split(',')[0].split(' (')[0], capped, mons + ' mj.' + (c.max != null ? ' (najviše ' + fmtN(c.max) + ')' : ''));
+  });
+  const std = rows.reduce((s, r) => s + r.pts, 0);
+  const cats = (p.razgovor || []).map(x => Math.max(0, Math.min(Number(x) || 0, R.razgovor.maxCat)));
+  const interview = cats.length ? cats.reduce((s, x) => s + x, 0) / 5 : 0;
+  return {rows, std: r2(std), interview: r2(interview), total: r2(std + interview)};
+}
+const myCalc = () => calc(S.profile, S.rules);
+
+/* ====================== Natječaji – logika ====================== */
+const isOpen = n => (!n.rok || daysUntil(n.rok) >= 0) && n.status !== 'ponisten';
+const stemSet = x => new Set(norm(x).split(/[^a-z0-9]+/).filter(w => w.length > 2).map(w => w.slice(0, 3)));
+function specMatch(a, b){
+  const x = stemSet(a), y = stemSet(b);
+  if (!x.size || !y.size) return false;
+  const sub = (p, q) => [...p].every(t => q.has(t));
+  return sub(x, y) || sub(y, x);
+}
+function alarmMatch(n){
+  const a = S.alarms;
+  const bySpec = a.specs.length && n.spec && a.specs.some(s => specMatch(s, n.spec));
+  const byZup = a.zupanije.length && n.zupanija && a.zupanije.includes(n.zupanija);
+  return !!(bySpec || byZup);
+}
+function badge(n){
+  if (!n.rok) return '<span class="tag">bez roka</span>';
+  const d = daysUntil(n.rok);
+  if (d < 0) return '<span class="tag">istekao ' + fmtDate(n.rok) + '</span>';
+  if (d === 0) return '<span class="tag bad">rok danas!</span>';
+  const cls = d <= 3 ? 'bad' : d <= 7 ? 'warn' : 'ok';
+  return '<span class="tag ' + cls + '">rok za ' + d + ' d · ' + fmtDate(n.rok) + '</span>';
+}
+
+/* ====================== UI stanje ====================== */
+const TABS = [['pregled','Pregled'],['natjecaji','Natječaji'],['bodovi','Kalkulator bodova'],['rezultati','Rezultati i statistika'],['literatura','Literatura i smjernice'],['edukacije','Edukacije i kongresi'],['vodic','Vodič'],['postavke','Alarmi i podaci']];
+const ui = {inboxAlarms:false, inboxAll:false, tab:'pregled', f:{q:'', spec:'', zup:'', st:'', view:'otvoreni'}, grp:'spec', lit:{q:'', tip:'', izv:'', neprocitano:false}, eduView:'nadolazece', searchQ:''};
+function go(t){ ui.tab = t; history.replaceState(null, '', '#' + t); render(); window.scrollTo(0, 0); }
+
+function renderNav(){
+  const cnt = FEED.state === 'ok' ? inbox().length : 0;
+  $('#nav').innerHTML = TABS.map(([k, l]) => '<button data-act="tab" data-v="' + k + '" class="' + (ui.tab === k ? 'on' : '') + '">' + l + (k === 'natjecaji' && cnt ? ' <span class="tag bell">' + cnt + '</span>' : '') + '</button>').join('');
+}
+function softRender(){
+  const ae = document.activeElement;
+  if ($('#dlg').open || (ae && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName) && !ae.closest('nav'))) { renderNav(); return; }
+  render();
+}
+function render(){
+  renderNav();
+  const v = $('#view');
+  const fn = {pregled:vPregled, natjecaji:vNatjecaji, bodovi:vBodovi, rezultati:vRezultati, literatura:vLiteratura, edukacije:vEdukacije, vodic:vVodic, postavke:vPostavke}[ui.tab];
+  v.innerHTML = fn();
+  if (ui.tab === 'bodovi') updateCalcResult();
+  const dl1 = $('#dlSpec'); if (!dl1.children.length) dl1.innerHTML = SPEC_LIST.map(s => '<option value="' + esc(s) + '">').join('');
+  const dl2 = $('#dlHosp'); if (!dl2.children.length) dl2.innerHTML = Object.keys(HOSP).map(s => '<option value="' + esc(s) + '">').join('');
+}
+
+/* ====================== Pregled ====================== */
+function vPregled(){
+  const open = S.natjecaji.filter(isOpen);
+  const matches = open.filter(alarmMatch);
+  const c = myCalc();
+  const soon = open.filter(n => n.rok && daysUntil(n.rok) <= 30).sort((a, b) => a.rok.localeCompare(b.rok));
+  const edu = S.edu.filter(e => e.od && e.status !== 'odbaceno' && daysUntil(e.od) >= 0 && daysUntil(e.od) <= 45).sort((a, b) => a.od.localeCompare(b.od));
+  const urgent = open.filter(n => n.rok && daysUntil(n.rok) <= Math.min(3, S.alarms.days) && ['prati', 'prijavljen'].includes(n.status));
+  const searchChips = (S.alarms.specs.length ? S.alarms.specs : ['specijalizacija liječnik']).slice(0, 4)
+    .map(s => '<a class="chip" target="_blank" rel="noopener" href="' + gsearch('natječaj specijalizacija ' + s) + '&tbs=qdr:m">Google: ' + esc(s) + '</a>').join('');
+  return '<h1>Pregled</h1><p class="muted" style="margin-top:0">Danas je ' + fmtDate(todayISO()) + ' · podaci ostaju samo u ovom pregledniku</p>' +
+    (urgent.length ? '<div class="banner bad">⏰ Rok uskoro: ' + urgent.map(n => esc(n.spec) + ' (' + esc(n.ustanova) + ')').join(' · ') + '</div>' : '') +
+    '<div class="grid g4" style="margin-bottom:14px">' +
+      '<div class="card stat"><div class="v">' + open.length + '</div><div class="l">otvorenih natječaja u evidenciji</div></div>' +
+      '<div class="card stat"><div class="v">' + S.natjecaji.filter(n => ['prijavljen', 'razgovor'].includes(n.status)).length + '</div><div class="l">prijavljenih / u postupku</div></div>' +
+      '<div class="card stat"><a href="#natjecaji" data-act="tab" data-v="natjecaji" style="text-decoration:none;color:inherit"><div class="v">' + (FEED.state === 'ok' ? inbox().length : '–') + '</div><div class="l">' + (FEED.state === 'ok' ? 'novih otvorenih natječaja u popisu' + (inbox().filter(alarmMatchEntry).length && (S.alarms.specs.length || S.alarms.zupanije.length) ? ' (' + inbox().filter(alarmMatchEntry).length + ' s tvojih alarma)' : '') : 'automatski popis natječaja nije aktivan') + '</div></a></div>' +
+      '<div class="card stat"><a href="#bodovi" data-act="tab" data-v="bodovi" style="text-decoration:none;color:inherit"><div class="v">' + fmtN(c.total) + '</div><div class="l">moji procijenjeni bodovi (' + fmtN(c.std) + ' + razgovor ' + fmtN(c.interview) + ')</div></a></div>' +
+      '<div class="card stat"><div class="v">' + matches.length + '</div><div class="l">otvorenih koji se poklapaju s alarmima</div></div>' +
+    '</div>' +
+    '<div class="grid g2">' +
+      '<div class="card"><div class="row between"><h2>Rokovi u idućih 30 dana</h2><button class="btn sm" data-act="new-nat">+ Natječaj</button></div>' +
+        (soon.length ? '<div class="list">' + soon.map(n => '<div class="row between"><div><b>' + esc(n.spec) + '</b><div class="muted small">' + esc(n.ustanova) + '</div></div>' + badge(n) + '</div>').join('') + '</div>' : '<div class="empty">Nema bliskih rokova. Dodaj natječaj pod „Natječaji”.</div>') + '</div>' +
+      '<div class="card"><h2>Poklapanje s alarmima</h2>' +
+        (matches.length ? '<div class="list">' + matches.map(n => '<div class="row between"><div><b>' + esc(n.spec) + '</b> <span class="muted small">· ' + esc(n.ustanova) + '</span></div>' + badge(n) + '</div>').join('') + '</div>' :
+          '<div class="empty">' + (S.alarms.specs.length || S.alarms.zupanije.length ? 'Nijedan otvoreni natječaj se ne poklapa.' : 'Postavi alarme (specijalizacije / županije) u „Alarmi i podaci”.') + '</div>') + '</div>' +
+      '<div class="card"><h2>Edukacije u idućih 45 dana</h2>' +
+        (edu.length ? '<div class="list">' + edu.map(e => '<div class="row between"><div><b>' + esc(e.naziv) + '</b><div class="muted small">' + fmtDate(e.od) + (e.mjesto ? ' · ' + esc(e.mjesto) : '') + '</div></div>' + (e.bodovi ? '<span class="tag ok">' + fmtN(e.bodovi) + ' b.</span>' : '') + '</div>').join('') + '</div>' : '<div class="empty">Nema planiranih edukacija.</div>') + '</div>' +
+      '<div class="card"><h2>Gdje tražiti nove natječaje</h2><p class="muted small" style="margin-top:0">Aplikacija radi lokalno pa sama ne skuplja natječaje s weba. Ove poveznice otvaraju službene izvore.</p>' +
+        '<div class="chips"><a class="chip" target="_blank" rel="noopener" href="https://narodne-novine.nn.hr/">Narodne novine</a><a class="chip" target="_blank" rel="noopener" href="https://zdravlje.gov.hr/">Ministarstvo zdravstva</a><a class="chip" target="_blank" rel="noopener" href="https://www.hlk.hr/">HLK</a>' + searchChips + '</div></div>' +
+    '</div>';
+}
+
+/* ====================== Natječaji ====================== */
+function vNatjecaji(){
+  const f = ui.f;
+  const specs = [...new Set(S.natjecaji.map(n => n.spec).filter(Boolean))].sort();
+  const zups = [...new Set(S.natjecaji.map(n => n.zupanija).filter(Boolean))].sort();
+  let list = S.natjecaji.filter(n => {
+    if (f.view === 'otvoreni' && !isOpen(n)) return false;
+    if (f.view === 'proslo' && isOpen(n)) return false;
+    if (f.spec && n.spec !== f.spec) return false;
+    if (f.zup && n.zupanija !== f.zup) return false;
+    if (f.st && n.status !== f.st) return false;
+    if (f.q && !norm([n.spec, n.ustanova, n.zupanija, n.biljeske].join(' ')).includes(norm(f.q))) return false;
+    return true;
+  });
+  list.sort((a, b) => f.view === 'proslo' ? (b.rok || '').localeCompare(a.rok || '') : ((a.rok || '9999').localeCompare(b.rok || '9999')));
+  return '<div class="row between"><div><h1>Natječaji za specijalizacije</h1><div class="muted">Novi natječaji stižu automatski u sandučić; ostale možeš dodati ručno. Prošli natječaji s pragovima hrane statistiku.</div></div><button class="btn" data-act="new-nat">+ Novi natječaj</button></div>' + inboxHTML() +
+    '<div class="toolbar"><input type="search" placeholder="Traži…" value="' + esc(f.q) + '" data-filter="q">' +
+      '<select data-filter="view"><option value="otvoreni"' + (f.view === 'otvoreni' ? ' selected' : '') + '>Otvoreni</option><option value="proslo"' + (f.view === 'proslo' ? ' selected' : '') + '>Prošli / zatvoreni</option><option value="svi"' + (f.view === 'svi' ? ' selected' : '') + '>Svi</option></select>' +
+      '<select data-filter="spec"><option value="">Sve specijalizacije</option>' + specs.map(s => '<option' + (f.spec === s ? ' selected' : '') + '>' + esc(s) + '</option>').join('') + '</select>' +
+      '<select data-filter="zup"><option value="">Sve županije</option>' + zups.map(s => '<option' + (f.zup === s ? ' selected' : '') + '>' + esc(s) + '</option>').join('') + '</select>' +
+      '<select data-filter="st"><option value="">Svi statusi</option>' + Object.entries(STATUSI).map(([k, v]) => '<option value="' + k + '"' + (f.st === k ? ' selected' : '') + '>' + v[0] + '</option>').join('') + '</select></div>' +
+    (list.length ? '<div class="list">' + list.map(natCard).join('') + '</div>' : '<div class="card empty">' + (S.natjecaji.length ? 'Nema natječaja za odabrane filtere.' : 'Još nema natječaja. Klikni „+ Novi natječaj”.') + '</div>');
+}
+function natCard(n){
+  const hasRes = n.prijavljeno != null || n.pragPrije != null || n.pragNakon != null;
+  return '<article class="card item" data-id="' + n.id + '"><div class="row between"><div><h3>' + esc(n.spec || '—') + '</h3><div class="muted">' + esc(n.ustanova) + '</div></div><div class="row">' + (alarmMatch(n) ? '<span class="tag bell">🔔 alarm</span>' : '') + badge(n) + '</div></div>' +
+    '<div class="meta">' + (n.zupanija ? '<span>📍 ' + esc(n.zupanija) + '</span>' : '') + (n.mjesta != null ? '<span>Mjesta: <b>' + n.mjesta + '</b></span>' : '') + (n.objavljen ? '<span>Objavljen: ' + fmtDate(n.objavljen) + '</span>' : '') +
+      (hasRes ? '<span>Prijavljeno: <b>' + (n.prijavljeno ?? '–') + '</b></span><span>Prag prije razgovora: <b>' + fmtN(n.pragPrije) + '</b></span><span>Prag nakon razgovora: <b>' + fmtN(n.pragNakon) + '</b></span>' : '') + '</div>' +
+    (n.biljeske ? '<div class="small">' + esc(n.biljeske).replace(/\n/g, '<br>') + '</div>' : '') +
+    '<div class="actions"><select class="st" data-act-change="nat-status" data-id="' + n.id + '">' + Object.entries(STATUSI).map(([k, v]) => '<option value="' + k + '"' + (n.status === k ? ' selected' : '') + '>' + v[0] + '</option>').join('') + '</select>' +
+      '<button class="btn sec sm" data-act="edit-nat" data-id="' + n.id + '">Uredi</button>' +
+      (n.link ? '<a class="btn sec sm" target="_blank" rel="noopener" href="' + esc(n.link) + '">Otvori natječaj ↗</a>' : '') +
+      '<a class="btn sec sm" target="_blank" rel="noopener" href="' + gsearch('natječaj specijalizacija ' + n.spec + ' ' + n.ustanova + ' rezultati') + '">Google ↗</a></div></article>';
+}
+function natForm(n){
+  n = n || {status:'prati'};
+  const o = (v, cur) => '<option value="' + esc(v) + '"' + (cur === v ? ' selected' : '') + '>' + esc(v) + '</option>';
+  return '<h2>' + (n.id ? 'Uredi natječaj' : 'Novi natječaj') + '</h2>' +
+    '<div class="f2"><div class="f"><label>Ustanova</label><input name="ustanova" list="dlHosp" required value="' + esc(n.ustanova) + '" data-hosp></div><div class="f"><label>Specijalizacija</label><input name="spec" list="dlSpec" required value="' + esc(n.spec) + '"></div></div>' +
+    '<div class="f3"><div class="f"><label>Županija</label><select name="zupanija"><option value="">–</option>' + ZUPANIJE.map(z => o(z, n.zupanija)).join('') + '</select></div><div class="f"><label>Broj mjesta</label><input name="mjesta" type="number" min="0" value="' + (n.mjesta ?? '') + '"></div><div class="f"><label>Status</label><select name="status">' + Object.entries(STATUSI).map(([k, v]) => '<option value="' + k + '"' + (n.status === k ? ' selected' : '') + '>' + v[0] + '</option>').join('') + '</select></div></div>' +
+    '<div class="f2"><div class="f"><label>Datum objave</label><input name="objavljen" type="date" value="' + esc(n.objavljen) + '"></div><div class="f"><label>Rok za prijavu</label><input name="rok" type="date" value="' + esc(n.rok) + '"></div></div>' +
+    '<div class="f"><label>Poveznica na natječaj</label><input name="link" type="url" placeholder="https://…" value="' + esc(n.link) + '"></div>' +
+    '<div class="f"><label>Bilješke</label><textarea name="biljeske">' + esc(n.biljeske) + '</textarea></div><hr>' +
+    '<h3 style="margin-bottom:8px">Rezultati (kad budu objavljeni)</h3>' +
+    '<div class="f3"><div class="f"><label>Broj prijavljenih</label><input name="prijavljeno" type="number" min="0" value="' + (n.prijavljeno ?? '') + '"></div><div class="f"><label>Bodovi zadnjeg primljenog – prije razgovora</label><input name="pragPrije" type="number" step="0.01" value="' + (n.pragPrije ?? '') + '"></div><div class="f"><label>Bodovi zadnjeg primljenog – nakon razgovora</label><input name="pragNakon" type="number" step="0.01" value="' + (n.pragNakon ?? '') + '"></div></div>' +
+    '<div class="f2"><div class="f"><label>Je li razgovor promijenio poredak?</label><select name="promjena"><option value="">Nepoznato</option><option value="da"' + (n.promjena === 'da' ? ' selected' : '') + '>Da</option><option value="ne"' + (n.promjena === 'ne' ? ' selected' : '') + '>Ne</option></select></div><div class="f"><label>Moji službeni bodovi (ako su objavljeni)</label><input name="mojiBodovi" type="number" step="0.01" value="' + (n.mojiBodovi ?? '') + '"></div></div>' +
+    '<div class="row between" style="margin-top:14px"><div>' + (n.id ? '<button type="button" class="btn bad" data-act="del-nat" data-id="' + n.id + '">Obriši</button>' : '') + '</div><div class="row"><button type="button" class="btn sec" data-act="close-dlg">Odustani</button><button class="btn" value="save">Spremi</button></div></div>';
+}
+function openDlg(html, onSubmit){
+  const dlg = $('#dlg'), form = $('#dlgForm');
+  form.innerHTML = html;
+  form.onsubmit = e => { e.preventDefault(); const fd = Object.fromEntries(new FormData(form).entries()); onSubmit(fd, form); };
+  if (!dlg.open) dlg.showModal();
+}
+const closeDlg = () => { const d = $('#dlg'); if (d.open) d.close(); };
+function editNat(id){
+  const n = S.natjecaji.find(x => x.id === id);
+  openDlg(natForm(n), fd => {
+    const rec = {id: id || uid(), ustanova: fd.ustanova.trim(), spec: fd.spec.trim(), zupanija: fd.zupanija, mjesta: num(fd.mjesta), status: fd.status, objavljen: fd.objavljen, rok: fd.rok, link: fd.link.trim(), biljeske: fd.biljeske.trim(), prijavljeno: num(fd.prijavljeno), pragPrije: num(fd.pragPrije), pragNakon: num(fd.pragNakon), promjena: fd.promjena, mojiBodovi: num(fd.mojiBodovi)};
+    if (id) S.natjecaji[S.natjecaji.findIndex(x => x.id === id)] = rec; else S.natjecaji.push(rec);
+    save(); closeDlg(); render(); toast('Natječaj spremljen');
+  });
+}
+
+/* ====================== Kalkulator (UI) ====================== */
+function vBodovi(){
+  const p = S.profile, R = S.rules;
+  const f = (label, name, val, extra) => '<div class="f"><label>' + label + '</label><input data-p="' + name + '" type="number" step="any" min="0" value="' + esc(val) + '" ' + (extra || '') + '></div>';
+  return '<h1>Kalkulator bodova</h1><p class="muted" style="margin-top:0">Procjena prema Pravilniku o standardima i načinu prijma specijalizanata (NN 94/2026, na snazi od 3.9.2026.) za doktore medicine. Službene bodove utvrđuje povjerenstvo ustanove.</p>' +
+    '<div class="grid calcgrid"><div class="grid">' +
+    '<div class="card"><h2>Studij</h2><div class="f3">' + f('Trajanje studija (god.)', 'studijGod', p.studijGod) + f('Produžetak bez opravdanja (god.)', 'produzenje', p.produzenje) + f('Težinski prosjek ocjena', 'prosjek', p.prosjek, 'step="0.01" max="5" placeholder="npr. 4,25"') + '</div>' +
+      '<div class="f2">' + f('Nagrade rektora / dekana (broj)', 'nagrade', p.nagrade) + '<div class="f"><label>Poslijediplomski doktorski studij</label><select data-p="phd">' + [['none', 'Nemam'], ['upis', 'Upisan'], ['god2', 'Upisan u 2. godinu'], ['god3', 'Upisan u 3. godinu'], ['doktorat', 'Doktor znanosti']].map(([k, l]) => '<option value="' + k + '"' + (p.phd === k ? ' selected' : '') + '>' + l + '</option>').join('') + '</select></div></div></div>' +
+    '<div class="card"><h2>Stručna i znanstvena aktivnost</h2><div class="f2">' + f('Indeksirani časopisi – prvi autor', 'radovi.idxFirst', p.radovi.idxFirst) + f('Indeksirani časopisi – koautor', 'radovi.idxCo', p.radovi.idxCo) + f('Stručni radovi (neindeks.) – prvi autor', 'radovi.nonIdxFirst', p.radovi.nonIdxFirst) + f('Stručni radovi (neindeks.) – koautor', 'radovi.nonIdxCo', p.radovi.nonIdxCo) + '</div></div>' +
+    '<div class="card"><div class="row between"><h2>Radno iskustvo</h2><button class="btn sm" data-act="add-rad">+ Dodaj razdoblje</button></div>' +
+      (p.rad.length ? p.rad.map((e, i) => '<div class="f3" style="align-items:end;margin-bottom:6px"><div class="f" style="grid-column:span 1"><label>Vrsta</label><select data-rad="' + i + '" data-k="cat">' + R.rad.map(c => '<option value="' + c.id + '"' + (e.cat === c.id ? ' selected' : '') + '>' + esc(c.naziv.length > 46 ? c.naziv.slice(0, 44) + '…' : c.naziv) + '</option>').join('') + '</select></div>' +
+        '<div class="f"><label>Mjeseci</label><input type="number" min="0" step="any" data-rad="' + i + '" data-k="mj" value="' + esc(e.mj) + '"></div>' +
+        '<div class="f row" style="flex-wrap:nowrap"><label style="margin:0;display:flex;gap:6px;align-items:center;white-space:nowrap"><input type="checkbox" data-rad="' + i + '" data-k="kont"' + (e.kont ? ' checked' : '') + '> kontinuirano</label><button class="btn bad sm" data-act="del-rad" data-i="' + i + '">✕</button></div></div>').join('') : '<div class="muted small">Dodaj razdoblja rada (primarna zaštita, OHBP, otoci, nastava…). „Kontinuirano” primjenjuje bodove za 6 / 12 uzastopnih mjeseci ako su veći od zbroja po mjesecima.</div>') + '</div>' +
+    '<div class="card"><h2>Razgovor s povjerenstvom (procjena)</h2><p class="muted small" style="margin-top:0">Svaki član ocjenjuje 5 kategorija od 0 do ' + R.razgovor.maxCat + '; zbroj se dijeli s 5. Upiši očekivani prosjek po kategoriji.</p><div class="f2">' +
+      RAZGOVOR_KAT.map((k, i) => '<div class="f"><label>' + esc(k) + '</label><input type="number" min="0" max="' + R.razgovor.maxCat + '" step="0.5" data-raz="' + i + '" value="' + esc(p.razgovor[i]) + '"></div>').join('') + '</div></div>' +
+    '</div><div class="sticky"><div class="card" id="calcOut"></div></div></div>';
+}
+function updateCalcResult(){
+  const c = myCalc(), el = $('#calcOut'); if (!el) return;
+  el.innerHTML = '<div class="muted small">Ukupno (standardi + razgovor)</div><div class="total">' + fmtN(c.total) + '</div>' +
+    '<div class="tw"><table><tbody>' + c.rows.map(r => '<tr><td>' + esc(r.label) + '<div class="muted small">' + esc(r.note) + '</div></td><td class="num"><b>' + fmtN(r.pts) + '</b></td></tr>').join('') +
+    '<tr><td><b>Zbroj standarda</b></td><td class="num"><b>' + fmtN(c.std) + '</b></td></tr><tr><td><b>Razgovor</b> <span class="muted small">(prosjek članova, Σ/5)</span></td><td class="num"><b>' + fmtN(c.interview) + '</b></td></tr></tbody></table></div>' +
+    '<p class="muted small" style="margin-bottom:0">Pravilnik izričito ne propisuje kako se bodovi više članova spajaju ni kako se standardi zbrajaju s razgovorom; ovdje se uzima prosjek članova i običan zbroj. Pravila možeš ispraviti u „Alarmi i podaci”.</p>';
+}
+
+/* ====================== Rezultati ====================== */
+function vRezultati(){
+  const withRes = S.natjecaji.filter(n => n.prijavljeno != null || n.pragPrije != null || n.pragNakon != null);
+  const key = ui.grp;
+  const g = {};
+  withRes.forEach(n => { const k = n[key] || '—'; (g[k] = g[k] || []).push(n); });
+  const rows = Object.entries(g).map(([k, a]) => {
+    const mj = a.reduce((s, x) => s + (x.mjesta || 0), 0), pr = a.reduce((s, x) => s + (x.prijavljeno || 0), 0);
+    const kn = a.filter(x => x.promjena);
+    return {k, n:a.length, mj, pr, ratio: mj ? pr / mj : null, prije: avg(a.map(x => x.pragPrije)), nakon: avg(a.map(x => x.pragNakon)), prom: kn.filter(x => x.promjena === 'da').length + '/' + kn.length};
+  }).sort((a, b) => b.n - a.n || a.k.localeCompare(b.k));
+  const c = myCalc();
+  const pos = withRes.filter(n => n.pragPrije != null || n.pragNakon != null).map(n => {
+    const cmpTotal = n.pragNakon != null; const mine = cmpTotal ? c.total : c.std; const prag = cmpTotal ? n.pragNakon : n.pragPrije;
+    return {n, mine, prag, diff: r2(mine - prag), basis: cmpTotal ? 'ukupno vs. prag nakon razgovora' : 'standardi vs. prag prije razgovora'};
+  }).sort((a, b) => b.diff - a.diff);
+  const pass = pos.filter(x => x.diff >= 0).length;
+  return '<h1>Rezultati i statistika</h1><p class="muted" style="margin-top:0">Računa se iz natječaja kojima si upisao/la rezultate (broj prijavljenih, pragovi). Što više prošlih natječaja unesen, to bolja slika.</p>' +
+    '<div class="card"><div class="row between"><h2>Prema grupi</h2><select style="width:auto" data-grp><option value="spec"' + (key === 'spec' ? ' selected' : '') + '>Specijalizaciji</option><option value="zupanija"' + (key === 'zupanija' ? ' selected' : '') + '>Županiji</option><option value="ustanova"' + (key === 'ustanova' ? ' selected' : '') + '>Ustanovi</option></select></div>' +
+      (rows.length ? '<div class="tw"><table><thead><tr><th>Grupa</th><th class="num">Natječaja</th><th class="num">Mjesta</th><th class="num">Prijavljenih</th><th class="num">Prijava / mjestu</th><th class="num">Prosj. prag prije</th><th class="num">Prosj. prag nakon</th><th class="num">Razgovor promijenio poredak</th></tr></thead><tbody>' +
+        rows.map(r => '<tr><td>' + esc(r.k) + '</td><td class="num">' + r.n + '</td><td class="num">' + r.mj + '</td><td class="num">' + r.pr + '</td><td class="num">' + fmtN(r.ratio) + '</td><td class="num">' + fmtN(r.prije) + '</td><td class="num">' + fmtN(r.nakon) + '</td><td class="num">' + r.prom + '</td></tr>').join('') + '</tbody></table></div>' :
+        '<div class="empty">Još nema unesenih rezultata. Otvori natječaj → „Uredi” → odjeljak „Rezultati”.</div>') + '</div>' +
+    '<div class="card" style="margin-top:14px"><h2>Gdje bi te moglo primiti</h2><p class="muted small" style="margin-top:0">Tvoji bodovi: standardi <b>' + fmtN(c.std) + '</b>, ukupno <b>' + fmtN(c.total) + '</b>. ' + (pos.length ? 'Iznad ili na pragu u <b>' + pass + '</b> od ' + pos.length + ' natječaja.' : '') + '</p>' +
+      (pos.length ? '<div class="tw"><table><thead><tr><th>Natječaj</th><th class="num">Prag</th><th class="num">Moji bodovi</th><th class="num">Razlika</th><th>Usporedba</th></tr></thead><tbody>' +
+        pos.map(x => '<tr><td><b>' + esc(x.n.spec) + '</b><div class="muted small">' + esc(x.n.ustanova) + '</div></td><td class="num">' + fmtN(x.prag) + '</td><td class="num">' + fmtN(x.mine) + '</td><td class="num ' + (x.diff >= 0 ? 'pos' : 'neg') + '">' + (x.diff >= 0 ? '+' : '') + fmtN(x.diff) + '</td><td class="muted small">' + x.basis + '</td></tr>').join('') + '</tbody></table></div>' :
+        '<div class="empty">Upiši pragove (bodove zadnjeg primljenog) uz natječaje.</div>') + '</div>';
+}
+
+/* ====================== Literatura ====================== */
+function vLiteratura(){
+  const L = ui.lit, q = ui.searchQ;
+  const enc = encodeURIComponent(q);
+  const links = q ? [['PubMed', 'https://pubmed.ncbi.nlm.nih.gov/?term=' + enc], ['Google Scholar', 'https://scholar.google.com/scholar?q=' + enc], ['HRČAK', gsearch('site:hrcak.srce.hr ' + q)], ['HZJZ', gsearch('site:hzjz.hr ' + q)], ['HALMED', gsearch('site:halmed.hr ' + q)], ['ECDC', gsearch('site:ecdc.europa.eu ' + q)], ['WHO', gsearch('site:who.int ' + q)], ['Cochrane', gsearch('site:cochranelibrary.com ' + q)], ['Smjernice (Google)', gsearch(q + ' clinical practice guideline 2026')]] : [];
+  let items = S.lit.filter(i => (!L.tip || i.tip === L.tip) && (!L.izv || i.izvor === L.izv) && (!L.neprocitano || !i.procitano) && (!L.q || norm([i.naslov, i.biljeska, i.tagovi].join(' ')).includes(norm(L.q))));
+  items.sort((a, b) => (b.datum || '').localeCompare(a.datum || ''));
+  return '<div class="row between"><div><h1>Literatura i smjernice</h1><div class="muted">Brza pretraga izvora + vlastita zbirka članaka i smjernica sa sažecima i prijevodom.</div></div><button class="btn" data-act="new-lit">+ Dodaj u zbirku</button></div>' +
+    '<div class="card" style="margin:14px 0"><h2>Brza pretraga</h2><div class="row"><input id="searchQ" placeholder="npr. bronchiolitis guideline, hipertenzija…" value="' + esc(q) + '" style="flex:1;min-width:200px"></div>' +
+      '<div class="chips" style="margin-top:10px">' + (links.length ? links.map(([l, u]) => '<a class="chip" target="_blank" rel="noopener" href="' + esc(u) + '">' + l + ' ↗</a>').join('') : '<span class="muted small">Upiši pojam pa odaberi izvor.</span>') + '</div>' +
+      '<hr><h3 style="margin-bottom:6px">Prijevod sažetka na hrvatski</h3><textarea id="trText" placeholder="Zalijepi abstract ili odlomak…"></textarea><div style="margin-top:8px"><button class="btn sm" data-act="translate">Prevedi (Google Translate) ↗</button> <span class="muted small">Otvara se u novoj kartici (do ~3000 znakova).</span></div></div>' +
+    '<div class="toolbar"><input type="search" placeholder="Pretraži zbirku…" data-lf="q" value="' + esc(L.q) + '"><select data-lf="tip"><option value="">Sve vrste</option>' + LIT_TIP.map(t => '<option' + (L.tip === t ? ' selected' : '') + '>' + t + '</option>').join('') + '</select><select data-lf="izv"><option value="">Svi izvori</option>' + LIT_IZVOR.map(t => '<option' + (L.izv === t ? ' selected' : '') + '>' + t + '</option>').join('') + '</select><label style="display:flex;align-items:center;gap:6px;margin:0"><input type="checkbox" data-lf="neprocitano"' + (L.neprocitano ? ' checked' : '') + '> samo nepročitano</label></div>' +
+    (items.length ? '<div class="list">' + items.map(i => '<article class="card item"><div class="row between"><h3>' + esc(i.naslov) + '</h3><div class="row"><span class="tag">' + esc(i.tip) + '</span><span class="tag">' + esc(i.izvor) + '</span>' + (i.procitano ? '<span class="tag ok">pročitano</span>' : '') + '</div></div>' +
+      '<div class="meta">' + (i.datum ? '<span>' + fmtDate(i.datum) + '</span>' : '') + (i.tagovi ? '<span>#' + esc(i.tagovi).split(/[,\s]+/).filter(Boolean).join(' #') + '</span>' : '') + '</div>' + (i.biljeska ? '<div class="small">' + esc(i.biljeska).replace(/\n/g, '<br>') + '</div>' : '') +
+      '<div class="actions">' + (i.link ? '<a class="btn sec sm" target="_blank" rel="noopener" href="' + esc(i.link) + '">Otvori ↗</a>' : '') + (i.biljeska ? '<button class="btn sec sm" data-act="translate-item" data-id="' + i.id + '">Prevedi bilješku ↗</button>' : '') + '<button class="btn sec sm" data-act="toggle-read" data-id="' + i.id + '">' + (i.procitano ? 'Označi nepročitano' : 'Označi pročitano') + '</button><button class="btn sec sm" data-act="edit-lit" data-id="' + i.id + '">Uredi</button></div></article>').join('') + '</div>' : '<div class="card empty">Zbirka je prazna.</div>');
+}
+function litForm(i){
+  i = i || {tip:'Članak', izvor:'PubMed', datum: todayISO()};
+  const opt = (arr, cur) => arr.map(x => '<option' + (cur === x ? ' selected' : '') + '>' + x + '</option>').join('');
+  return '<h2>' + (i.id ? 'Uredi stavku' : 'Nova stavka') + '</h2><div class="f"><label>Naslov</label><input name="naslov" required value="' + esc(i.naslov) + '"></div>' +
+    '<div class="f3"><div class="f"><label>Vrsta</label><select name="tip">' + opt(LIT_TIP, i.tip) + '</select></div><div class="f"><label>Izvor</label><select name="izvor">' + opt(LIT_IZVOR, i.izvor) + '</select></div><div class="f"><label>Datum</label><input type="date" name="datum" value="' + esc(i.datum) + '"></div></div>' +
+    '<div class="f"><label>Poveznica</label><input name="link" type="url" value="' + esc(i.link) + '"></div><div class="f"><label>Sažetak / bilješka</label><textarea name="biljeska" style="min-height:120px">' + esc(i.biljeska) + '</textarea></div>' +
+    '<div class="f2"><div class="f"><label>Oznake (zarezom)</label><input name="tagovi" value="' + esc(i.tagovi) + '"></div><div class="f"><label>&nbsp;</label><label style="display:flex;gap:6px;align-items:center;color:var(--ink)"><input type="checkbox" name="procitano"' + (i.procitano ? ' checked' : '') + '> pročitano</label></div></div>' +
+    '<div class="row between" style="margin-top:12px"><div>' + (i.id ? '<button type="button" class="btn bad" data-act="del-lit" data-id="' + i.id + '">Obriši</button>' : '') + '</div><div class="row"><button type="button" class="btn sec" data-act="close-dlg">Odustani</button><button class="btn">Spremi</button></div></div>';
+}
+function editLit(id){
+  const i = S.lit.find(x => x.id === id);
+  openDlg(litForm(i), fd => {
+    const rec = {id: id || uid(), naslov: fd.naslov.trim(), tip: fd.tip, izvor: fd.izvor, datum: fd.datum, link: fd.link.trim(), biljeska: fd.biljeska.trim(), tagovi: fd.tagovi.trim(), procitano: !!fd.procitano};
+    if (id) S.lit[S.lit.findIndex(x => x.id === id)] = rec; else S.lit.push(rec);
+    save(); closeDlg(); render(); toast('Spremljeno');
+  });
+}
+function openTranslate(text){
+  if (!text.trim()) return toast('Nema teksta za prijevod');
+  window.open('https://translate.google.com/?sl=auto&tl=hr&op=translate&text=' + encodeURIComponent(text.slice(0, 3000)), '_blank', 'noopener');
+}
+
+/* ====================== Edukacije ====================== */
+function vEdukacije(){
+  const v = ui.eduView;
+  let list = S.edu.filter(e => v === 'sve' || (v === 'nadolazece' ? (!e.do && !e.od) || daysUntil(e.do || e.od) >= 0 : (e.do || e.od) && daysUntil(e.do || e.od) < 0));
+  list.sort((a, b) => v === 'prosle' ? (b.od || '').localeCompare(a.od || '') : (a.od || '9999').localeCompare(b.od || '9999'));
+  const yr = String(new Date().getFullYear());
+  const got = S.edu.filter(e => e.status === 'odslusano' && (e.od || '').startsWith(yr)).reduce((s, e) => s + (num(e.bodovi) || 0), 0);
+  const gotAll = S.edu.filter(e => e.status === 'odslusano').reduce((s, e) => s + (num(e.bodovi) || 0), 0);
+  const srcs = [['HLK tečajevi i bodovi', gsearch('HLK tečajevi stručno usavršavanje bodovi')], ['E-akademija HLK', gsearch('HLK E-akademija')], ['EACCME', 'https://www.eaccme.uems.eu/'], ['Kongresi u Hrvatskoj', gsearch('medicinski kongres Hrvatska 2026 liječnici bodovi HLK')], ['Studentski kongresi', gsearch('studentski medicinski kongres 2026 Hrvatska')], ['ISICEM', gsearch('ISICEM congress')], ['ESNR', gsearch('ESNR congress')], ['OFTEX', gsearch('OFTEX conference')]];
+  return '<div class="row between"><div><h1>Edukacije i kongresi</h1><div class="muted">Kalendar kongresa i tečajeva s bodovima (HLK / EACCME).</div></div><button class="btn" data-act="new-edu">+ Dodaj</button></div>' +
+    '<div class="grid g4" style="margin:14px 0"><div class="card stat"><div class="v">' + fmtN(got) + '</div><div class="l">bodova ove godine (odslušano)</div></div><div class="card stat"><div class="v">' + fmtN(gotAll) + '</div><div class="l">bodova ukupno u evidenciji</div></div></div>' +
+    '<div class="card" style="margin-bottom:14px"><h3 style="margin-bottom:8px">Izvori za pretragu</h3><div class="chips">' + srcs.map(([l, u]) => '<a class="chip" target="_blank" rel="noopener" href="' + esc(u) + '">' + l + ' ↗</a>').join('') + '</div></div>' +
+    '<div class="toolbar"><select data-eduview style="max-width:220px"><option value="nadolazece"' + (v === 'nadolazece' ? ' selected' : '') + '>Nadolazeće</option><option value="prosle"' + (v === 'prosle' ? ' selected' : '') + '>Prošle</option><option value="sve"' + (v === 'sve' ? ' selected' : '') + '>Sve</option></select></div>' +
+    (list.length ? '<div class="list">' + list.map(e => '<article class="card item"><div class="row between"><div><h3>' + esc(e.naziv) + '</h3><div class="muted small">' + esc(e.tip) + (e.mjesto ? ' · ' + esc(e.mjesto) : '') + '</div></div><div class="row">' + (e.bodovi ? '<span class="tag ok">' + fmtN(num(e.bodovi)) + ' b. ' + esc(e.vrstaBodova || '') + '</span>' : '') + '<span class="tag' + (e.status === 'odslusano' ? ' ok' : e.status === 'prijavljen' ? ' warn' : '') + '">' + EDU_ST[e.status] + '</span></div></div>' +
+      '<div class="meta">' + (e.od ? '<span>📅 ' + fmtDate(e.od) + (e.do && e.do !== e.od ? ' – ' + fmtDate(e.do) : '') + (daysUntil(e.od) >= 0 ? ' (za ' + daysUntil(e.od) + ' d)' : '') + '</span>' : '') + '</div>' + (e.biljeska ? '<div class="small">' + esc(e.biljeska).replace(/\n/g, '<br>') + '</div>' : '') +
+      '<div class="actions">' + (e.link ? '<a class="btn sec sm" target="_blank" rel="noopener" href="' + esc(e.link) + '">Otvori ↗</a>' : '') + '<button class="btn sec sm" data-act="edit-edu" data-id="' + e.id + '">Uredi</button></div></article>').join('') + '</div>' : '<div class="card empty">Nema stavki.</div>');
+}
+function eduForm(e){
+  e = e || {tip:'Kongres', status:'zanima', vrstaBodova:'HLK'};
+  const opt = (arr, cur) => arr.map(x => '<option' + (cur === x ? ' selected' : '') + '>' + x + '</option>').join('');
+  return '<h2>' + (e.id ? 'Uredi' : 'Nova edukacija / kongres') + '</h2><div class="f"><label>Naziv</label><input name="naziv" required value="' + esc(e.naziv) + '"></div>' +
+    '<div class="f3"><div class="f"><label>Vrsta</label><select name="tip">' + opt(EDU_TIP, e.tip) + '</select></div><div class="f"><label>Od</label><input type="date" name="od" value="' + esc(e.od) + '"></div><div class="f"><label>Do</label><input type="date" name="do" value="' + esc(e.do) + '"></div></div>' +
+    '<div class="f3"><div class="f"><label>Mjesto</label><input name="mjesto" value="' + esc(e.mjesto) + '"></div><div class="f"><label>Bodovi</label><input name="bodovi" type="number" step="0.5" min="0" value="' + esc(e.bodovi) + '"></div><div class="f"><label>Vrsta bodova</label><select name="vrstaBodova">' + opt(['HLK', 'EACCME', 'Ostalo'], e.vrstaBodova) + '</select></div></div>' +
+    '<div class="f2"><div class="f"><label>Status</label><select name="status">' + Object.entries(EDU_ST).map(([k, v]) => '<option value="' + k + '"' + (e.status === k ? ' selected' : '') + '>' + v + '</option>').join('') + '</select></div><div class="f"><label>Poveznica</label><input name="link" type="url" value="' + esc(e.link) + '"></div></div>' +
+    '<div class="f"><label>Bilješka</label><textarea name="biljeska">' + esc(e.biljeska) + '</textarea></div>' +
+    '<div class="row between" style="margin-top:12px"><div>' + (e.id ? '<button type="button" class="btn bad" data-act="del-edu" data-id="' + e.id + '">Obriši</button>' : '') + '</div><div class="row"><button type="button" class="btn sec" data-act="close-dlg">Odustani</button><button class="btn">Spremi</button></div></div>';
+}
+function editEdu(id){
+  const e = S.edu.find(x => x.id === id);
+  openDlg(eduForm(e), fd => {
+    const rec = {id: id || uid(), naziv: fd.naziv.trim(), tip: fd.tip, od: fd.od, do: fd.do, mjesto: fd.mjesto.trim(), bodovi: fd.bodovi, vrstaBodova: fd.vrstaBodova, status: fd.status, link: fd.link.trim(), biljeska: fd.biljeska.trim()};
+    if (id) S.edu[S.edu.findIndex(x => x.id === id)] = rec; else S.edu.push(rec);
+    save(); closeDlg(); render(); toast('Spremljeno');
+  });
+}
+
+/* ====================== Vodič ====================== */
+function vVodic(){
+  const done = CHECKLIST.filter((_, i) => S.checklist[i]).length;
+  return '<h1>Vodič kroz prijavu</h1><p class="muted" style="margin-top:0">Sažetak postupka prema NN 94/2026. Uvijek provjeri rokove i priloge u samom natječaju.</p><div class="grid g2">' +
+    '<div class="card"><h2>Dokumenti za prijavu <span class="tag ' + (done === CHECKLIST.length ? 'ok' : '') + '">' + done + '/' + CHECKLIST.length + '</span></h2>' +
+      CHECKLIST.map((t, i) => '<label class="check' + (S.checklist[i] ? ' done' : '') + '" style="color:var(--ink);font-weight:400;font-size:15px"><input type="checkbox" data-chk="' + i + '"' + (S.checklist[i] ? ' checked' : '') + '><span>' + esc(t) + '</span></label>').join('') +
+      '<p class="muted small" style="margin-bottom:0">Popis je okvirni (diploma, odobrenje za samostalan rad, prijepis, potvrda o prosjeku i trajanju, nagrade, doktorat, radovi i dokazi o radnom iskustvu). Točan popis navodi natječaj. Originali se provjeravaju prije sklapanja ugovora o radu.</p></div>' +
+    '<div class="card"><h2>Tijek postupka</h2><ol class="steps">' +
+      '<li><b>Objava natječaja</b><br><span class="muted small">Narodne novine i mrežna stranica zdravstvene ustanove.</span></li>' +
+      '<li><b>Prijava u roku iz natječaja</b><br><span class="muted small">Prema tekstu pravilnika, prijave se podnose u roku od 15 dana od objave – provjeri točan rok u natječaju.</span></li>' +
+      '<li><b>Lista pristupnika s bodovima</b><br><span class="muted small">Ustanova je objavljuje u roku od 15 dana od isteka roka za prijavu, prije razgovora.</span></li>' +
+      '<li><b>Razgovor s povjerenstvom</b><br><span class="muted small">Najkasnije 30 dana od isteka roka za prijavu; poziv stiže e-poštom. Pozivaju se samo pristupnici s potpunom i pravodobnom dokumentacijom.</span></li>' +
+      '<li><b>Psihološko testiranje</b><br><span class="muted small">Pristupnik s najviše bodova (standardi + razgovor) upućuje se na testiranje; za kirurške grane i na manualnu spretnost. Ako ne zadovolji, na red dolazi idući po bodovima.</span></li>' +
+      '<li><b>Prijedlog i ugovor</b><br><span class="muted small">Povjerenstvo (5 članova) predlaže pristupnika; originali dokumenata provjeravaju se prije ugovora.</span></li></ol>' +
+      '<div class="chips"><a class="chip" target="_blank" rel="noopener" href="https://narodne-novine.nn.hr/clanci/sluzbeni/2026_08_94_1151.html">Službeni tekst (NN 94/2026) ↗</a><a class="chip" target="_blank" rel="noopener" href="https://zakon.hr/c/podzakonski-propis/1058271/nn-94-2026-(26.8.2026.),-pravilnik-o-standardima-i-nacinu-prijma-specijalizanata">zakon.hr ↗</a></div></div>' +
+    '<div class="card"><h2>Što se ocjenjuje na razgovoru</h2><p class="muted small" style="margin-top:0">Svaki član ocjenjuje pet kategorija (0–6); zbroj se dijeli s 5.</p><ul style="margin:0;padding-left:20px">' + RAZGOVOR_KAT.map(k => '<li>' + esc(k) + '</li>').join('') + '</ul></div></div>';
+}
+
+/* ====================== Postavke ====================== */
+const RULE_FIELDS = [['studij.perYear', 'Trajanje studija – bodova po godini'], ['studij.extPenalty', 'Produžetak studija – minus po godini'], ['nagrade.per', 'Nagrada rektora/dekana – po nagradi'], ['nagrade.max', 'Nagrade – najviše'], ['phd.upis', 'Doktorski – upis'], ['phd.god2', 'Doktorski – upis u 2. god.'], ['phd.god3', 'Doktorski – upis u 3. god.'], ['phd.doktorat', 'Doktor znanosti'], ['phd.max', 'Doktorski – najviše'], ['radovi.idxFirst', 'Indeksirani – prvi autor'], ['radovi.idxCo', 'Indeksirani – koautor'], ['radovi.nonIdxFirst', 'Neindeksirani – prvi autor'], ['radovi.nonIdxCo', 'Neindeksirani – koautor'], ['radovi.max', 'Stručna/znanstvena aktivnost – najviše'], ['razgovor.maxCat', 'Razgovor – najviše po kategoriji']];
+function vPostavke(){
+  const a = S.alarms;
+  return '<h1>Alarmi i podaci</h1><div class="grid g2">' +
+    '<div class="card"><h2>Alarmi</h2><p class="muted small" style="margin-top:0">Natječaji koji odgovaraju odabranoj specijalizaciji <b>ili</b> županiji dobivaju oznaku 🔔 i pojavljuju se na pregledu.</p>' +
+      '<div class="f"><label>Specijalizacije (dodaj upisom i Enterom)</label><input id="alarmSpec" list="dlSpec" placeholder="npr. Pedijatrija"><div class="chips" style="margin-top:6px">' + a.specs.map((s, i) => '<button class="chip on" data-act="rm-aspec" data-i="' + i + '">' + esc(s) + ' ✕</button>').join('') + '</div></div>' +
+      '<div class="f"><label>Županije</label><div class="chips">' + ZUPANIJE.map(z => '<button class="chip' + (a.zupanije.includes(z) ? ' on' : '') + '" data-act="tg-zup" data-v="' + esc(z) + '">' + esc(z.replace('-', '‑')) + '</button>').join('') + '</div></div>' +
+      '<div class="f"><label>Podsjeti na rok unaprijed (dana)</label><input type="number" min="0" max="30" data-alarm-days value="' + a.days + '" style="width:100px"></div>' +
+      '<div class="row"><button class="btn sec sm" data-act="notif">Dopusti obavijesti preglednika</button><button class="btn sm" data-act="ics">Izvezi rokove u kalendar (.ics)</button></div>' +
+      '<p class="muted small" style="margin-bottom:0">Obavijesti preglednika javljaju se samo dok je aplikacija otvorena. Za podsjetnike i kad je zatvorena uvezi .ics u kalendar na mobitelu (svaki rok dobiva podsjetnik 3 dana i 1 dan ranije). Novi natječaji se pojavljuju sami u sandučiću na kartici „Natječaji” kad je aplikacija objavljena na webu; za obavijest i kad je zatvorena služi e-pošta iz GitHuba (vidi upute).</p></div>' +
+    '<div class="card"><h2>Podaci</h2><p class="muted small" style="margin-top:0">Sve se sprema u ovaj preglednik na ovom računalu. Brisanje podataka preglednika briše i evidenciju, zato povremeno izvezi sigurnosnu kopiju.</p>' +
+      '<div class="row"><button class="btn" data-act="export">Izvezi sigurnosnu kopiju (.json)</button><button class="btn sec" data-act="import">Uvezi kopiju…</button><input type="file" id="impFile" accept="application/json,.json" hidden></div>' +
+      '<hr><p class="muted small">U evidenciji: ' + S.natjecaji.length + ' natječaja · ' + S.lit.length + ' članaka · ' + S.edu.length + ' edukacija.</p><button class="btn bad sm" data-act="reset">Obriši sve podatke</button></div>' +
+    '<div class="card" style="grid-column:1/-1"><h2>Pravila bodovanja (NN 94/2026, doktori medicine)</h2><p class="muted small" style="margin-top:0">Učitana su iz teksta pravilnika. Ako se nešto razlikuje od službenog teksta ili se pravilnik promijeni, ispravi ovdje – kalkulator odmah koristi nove vrijednosti.</p>' +
+      '<div class="tw"><table class="ruletbl"><tbody>' + RULE_FIELDS.map(([p, l]) => '<tr><td>' + l + '</td><td class="num"><input type="number" step="any" data-rule="' + p + '" value="' + getPath(S.rules, p) + '"></td></tr>').join('') + '</tbody></table></div>' +
+      '<h3 style="margin:14px 0 6px">Radno iskustvo</h3><div class="tw"><table class="ruletbl"><thead><tr><th>Vrsta</th><th class="num">bod./mj.</th><th class="num">najviše</th><th class="num">6 mj. kont.</th><th class="num">12 mj. kont.</th></tr></thead><tbody>' +
+      S.rules.rad.map((c, i) => '<tr><td>' + esc(c.naziv) + '</td>' + ['mj', 'max', 't6', 't12'].map(k => '<td class="num"><input type="number" step="any" data-rrule="' + i + '" data-k="' + k + '" value="' + (c[k] ?? '') + '" placeholder="–"></td>').join('') + '</tr>').join('') + '</tbody></table></div>' +
+      '<p class="muted small">Praznu vrijednost tumači se kao „bez ograničenja / bez posebnog bodovanja”. Retci označeni „provjeri” u tekstu pravilnika nisu bili jednoznačni pri dohvaćanju – usporedi ih sa službenim tekstom. Pravilnik ne navodi najviše bodova za duljinu studija i prosjek.</p>' +
+      '<button class="btn sec sm" data-act="reset-rules">Vrati zadana pravila</button></div></div>';
+}
+
+
+/* ====================== Automatski popis natječaja ====================== */
+const FEED = {items:[], generated:'', state:'idle', newKeys:new Set()};
+const feedKey = (f, sp) => f.id + ':' + (sp ? [...stemSet(sp.kanon || sp.naziv)].sort().join('-') : '?');
+function feedEntries(){
+  const best = {};
+  FEED.items.forEach(f => {
+    if (f.vrsta === 'ponistenje') return;
+    const list = (f.specs && f.specs.length) ? f.specs : [null];
+    list.forEach(sp => {
+      const key = feedKey(f, sp);
+      if (S.feed.dismissed.includes(key) || S.feed.added[key] || S.natjecaji.some(n => n.feedKey === key)) return;
+      const e = {key, f, spec: sp ? (sp.kanon || sp.naziv) : '', n: sp ? sp.n : null, past: !!(f.rok && daysUntil(f.rok) < 0)};
+      // isti natječaj objavljen više puta (ponovljeni): zadrži najnoviji
+      const g = norm(f.ustanova) + '|' + (sp ? [...stemSet(e.spec)].sort().join('-') : f.id);
+      if (!best[g] || (f.objavljen || '') > (best[g].f.objavljen || '')) best[g] = e;
+    });
+  });
+  return Object.values(best);
+}
+const inbox = () => feedEntries().filter(e => !e.past);
+const alarmMatchEntry = e => alarmMatch({spec: e.spec, zupanija: e.f.zupanija});
+const fmtDT = iso => { try { return new Date(iso).toLocaleString('hr-HR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'}); } catch (e) { return ''; } };
+
+async function syncFeed(){
+  if (!/^https?:/.test(location.protocol)) { FEED.state = 'local'; return; }
+  FEED.state = FEED.state === 'ok' ? 'ok' : 'loading';
+  try {
+    const r = await fetch('natjecaji.json?ts=' + Date.now(), {cache:'no-store'});
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    FEED.items = Array.isArray(j.natjecaji) ? j.natjecaji : [];
+    FEED.generated = j.generated || '';
+    FEED.state = 'ok';
+    const keys = inbox().map(e => e.key);
+    const first = !S.feed.seen.length && !S.feed.lastSync;
+    FEED.newKeys = new Set(first ? [] : keys.filter(k => !S.feed.seen.includes(k)));
+    S.feed.seen = [...new Set([...S.feed.seen, ...keys])].slice(-1500);
+    S.feed.lastSync = new Date().toISOString();
+    save();
+    notifyFeed();
+  } catch (e) { FEED.state = FEED.items.length ? 'ok' : 'error'; }
+  softRender();
+}
+function notifyFeed(){
+  try {
+    if (!('Notification' in window) || Notification.permission !== 'granted' || !FEED.newKeys.size) return;
+    const anyAlarm = S.alarms.specs.length || S.alarms.zupanije.length;
+    const hits = inbox().filter(e => FEED.newKeys.has(e.key) && (!anyAlarm || alarmMatchEntry(e)));
+    if (!hits.length) return;
+    new Notification('Novi natječaji (' + hits.length + ')', {body: hits.slice(0, 4).map(e => (e.spec || 'natječaj') + ' – ' + e.f.ustanova).join('\n')});
+  } catch (e) {}
+}
+function inboxHTML(){
+  const all = inbox();
+  let status = '';
+  if (FEED.state === 'local') status = 'Automatsko povlačenje radi kad je aplikacija objavljena na webu (vidi upute). U lokalnoj datoteci natječaje unosiš ručno.';
+  else if (FEED.state === 'loading' || FEED.state === 'idle') status = 'Učitavam popis natječaja…';
+  else if (FEED.state === 'error') status = 'Popis natječaja trenutno nije dostupan. <button class="btn sec sm" data-act="feed-refresh">Pokušaj ponovno</button>';
+  else if (!FEED.generated) status = 'Popis još nije povučen. U GitHubu pokreni „Run workflow” (vidi upute).';
+  else status = 'Popis ažuriran ' + fmtDT(FEED.generated) + ' · izvor: Narodne novine preko spec.edo.hr · ' + all.length + ' otvorenih · <button class="btn sec sm" data-act="feed-refresh">Osvježi</button>';
+  if (FEED.state === 'local' || !FEED.generated && FEED.state !== 'ok') return '<div class="card" style="margin:14px 0"><h2 style="margin-bottom:4px">📥 Novi natječaji</h2><div class="muted small">' + status + '</div></div>';
+  let list = ui.inboxAlarms ? all.filter(alarmMatchEntry) : all;
+  list = list.slice().sort((a, b) => (FEED.newKeys.has(b.key) - FEED.newKeys.has(a.key)) || (a.f.rok || '9999').localeCompare(b.f.rok || '9999'));
+  const lim = ui.inboxAll ? list.length : 12;
+  const anyAlarm = S.alarms.specs.length || S.alarms.zupanije.length;
+  const row = e => {
+    const f = e.f, isNew = FEED.newKeys.has(e.key);
+    return '<div class="row between" style="padding:10px 0;border-top:1px solid var(--line)"><div style="min-width:0;flex:1 1 320px"><b>' + esc(e.spec || 'Specijalizacije nisu prepoznate – otvori natječaj') + '</b>' + (e.n ? ' <span class="muted">× ' + e.n + '</span>' : '') +
+      (isNew ? ' <span class="tag ok">novo</span>' : '') + (alarmMatchEntry(e) && anyAlarm ? ' <span class="tag bell">🔔</span>' : '') + (f.vrsta === 'ponovljeni' ? ' <span class="tag warn">ponovljeni</span>' : f.vrsta === 'ispravak' ? ' <span class="tag warn">ispravak</span>' : f.vrsta === 'natjecaj_ponistenje' ? ' <span class="tag bad">dio poništen?</span>' : '') +
+      '<div class="muted small">' + esc(f.ustanova) + (f.zupanija ? ' · ' + esc(f.zupanija) : '') + (f.nn ? ' · ' + esc(f.nn) : '') + '</div>' +
+      '<div class="small" style="margin-top:3px">' + (f.rok ? badge({rok: f.rok}) + (f.rokProcijenjen ? ' <span class="muted">procjena</span>' : '') : '<span class="tag">rok nije prepoznat</span>') + (f.rokNapomena ? ' <span class="muted">' + esc(f.rokNapomena) + '</span>' : '') + '</div></div>' +
+      '<div class="row"><button class="btn sm" data-act="feed-add" data-key="' + esc(e.key) + '">Prati</button><button class="btn sec sm" data-act="feed-dismiss" data-key="' + esc(e.key) + '">Odbaci</button>' +
+      (f.link ? '<a class="btn sec sm" target="_blank" rel="noopener" href="' + esc(f.link) + '">Oglas ↗</a>' : '') + (f.pdf ? '<a class="btn sec sm" target="_blank" rel="noopener" href="' + esc(f.pdf) + '">PDF ↗</a>' : '') + '</div></div>';
+  };
+  return '<div class="card" style="margin:14px 0"><div class="row between"><h2 style="margin-bottom:4px">📥 Novi natječaji <span class="tag bell">' + list.length + '</span></h2><div class="row">' +
+    (anyAlarm ? '<label style="display:flex;gap:6px;align-items:center;margin:0;color:var(--ink)"><input type="checkbox" data-inboxalarm' + (ui.inboxAlarms ? ' checked' : '') + '> samo moji alarmi</label><button class="btn sm" data-act="feed-add-alarms">Dodaj sve s alarma</button>' : '') +
+    (list.length ? '<button class="btn sec sm" data-act="feed-dismiss-all">Odbaci prikazane</button>' : '') + '</div></div><div class="muted small" style="margin-bottom:6px">' + status + '</div>' +
+    (list.length ? list.slice(0, lim).map(row).join('') + (list.length > lim ? '<div style="padding-top:10px"><button class="btn sec sm" data-act="feed-more">Prikaži sve (' + list.length + ')</button></div>' : '') :
+      '<div class="empty" style="padding:14px">' + (ui.inboxAlarms ? 'Nema novih natječaja koji odgovaraju tvojim alarmima.' : 'Nema novih otvorenih natječaja.') + '</div>') + '</div>';
+}
+function feedToRecord(e){
+  const f = e.f;
+  let note = 'Automatski uvezeno iz popisa natječaja.';
+  if (f.rok && f.rokProcijenjen) note += ' Rok je procijenjen prema tekstu natječaja – provjeri.';
+  if (!f.rok) note += ' Rok nije prepoznat – provjeri u natječaju.';
+  if (f.rokNapomena) note += ' ' + f.rokNapomena;
+  if (f.vrsta === 'ispravak') note += ' (ispravak natječaja)';
+  return {id: uid(), ustanova: f.ustanova, spec: e.spec || '(provjeri natječaj)', zupanija: f.zupanija || '', mjesta: e.n, status: 'prati', objavljen: f.objavljen || '', rok: f.rok || '', link: f.link || '', biljeske: note, feedKey: e.key};
+}
+function feedAdd(entries){
+  entries.forEach(e => { S.natjecaji.push(feedToRecord(e)); S.feed.added[e.key] = 1; });
+  save(); render(); toast(entries.length === 1 ? 'Natječaj dodan u praćenje' : 'Dodano ' + entries.length + ' natječaja');
+}
+function shownInbox(){ const all = inbox(); return ui.inboxAlarms ? all.filter(alarmMatchEntry) : all; }
+
+/* ====================== Izvoz / kalendar ====================== */
+function download(name, text, type){
+  const url = URL.createObjectURL(new Blob([text], {type}));
+  const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+function exportJSON(){ download('specijalizacije-kopija-' + todayISO() + '.json', JSON.stringify(S, null, 2), 'application/json'); toast('Kopija preuzeta'); }
+function icsEsc(s){ return String(s || '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n'); }
+function plusDay(iso){ const d = new Date(iso + 'T00:00:00'); d.setDate(d.getDate() + 1); return isoOf(d); }
+function exportICS(){
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+  const ev = [];
+  const alarm = (txt, trig) => 'BEGIN:VALARM\r\nTRIGGER:' + trig + '\r\nACTION:DISPLAY\r\nDESCRIPTION:' + icsEsc(txt) + '\r\nEND:VALARM\r\n';
+  S.natjecaji.filter(n => n.rok && daysUntil(n.rok) >= 0 && n.status !== 'ponisten').forEach(n => {
+    ev.push('BEGIN:VEVENT\r\nUID:nat-' + n.id + '@specijalizacije.local\r\nDTSTAMP:' + stamp + '\r\nDTSTART;VALUE=DATE:' + n.rok.replace(/-/g, '') + '\r\nDTEND;VALUE=DATE:' + plusDay(n.rok).replace(/-/g, '') + '\r\nSUMMARY:' + icsEsc('Rok natječaja: ' + n.spec + ' – ' + n.ustanova) + '\r\nDESCRIPTION:' + icsEsc((n.biljeske || '') + (n.link ? '\n' + n.link : '')) + '\r\n' + alarm('Rok za natječaj sutra: ' + n.spec, '-P1D') + alarm('Rok za natječaj za 3 dana: ' + n.spec, '-P3D') + 'END:VEVENT\r\n');
+  });
+  S.edu.filter(e => e.od && e.status !== 'odbaceno' && daysUntil(e.do || e.od) >= 0).forEach(e => {
+    ev.push('BEGIN:VEVENT\r\nUID:edu-' + e.id + '@specijalizacije.local\r\nDTSTAMP:' + stamp + '\r\nDTSTART;VALUE=DATE:' + e.od.replace(/-/g, '') + '\r\nDTEND;VALUE=DATE:' + plusDay(e.do || e.od).replace(/-/g, '') + '\r\nSUMMARY:' + icsEsc(e.naziv) + '\r\nLOCATION:' + icsEsc(e.mjesto) + '\r\nDESCRIPTION:' + icsEsc((e.bodovi ? e.bodovi + ' bodova ' + (e.vrstaBodova || '') : '') + (e.link ? '\n' + e.link : '')) + '\r\n' + alarm('Edukacija uskoro: ' + e.naziv, '-P3D') + 'END:VEVENT\r\n');
+  });
+  if (!ev.length) return toast('Nema budućih rokova za izvoz');
+  download('specijalizacije-rokovi.ics', 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Specijalizacije//HR\r\nCALSCALE:GREGORIAN\r\n' + ev.join('') + 'END:VCALENDAR\r\n', 'text/calendar');
+  toast('Izvezeno ' + ev.length + ' događaja');
+}
+function checkNotifications(){
+  try {
+    if (!('Notification' in window) || Notification.permission !== 'granted' || S.lastNotified === todayISO()) return;
+    const due = S.natjecaji.filter(n => n.rok && isOpen(n) && daysUntil(n.rok) <= S.alarms.days && ['prati', 'prijavljen'].includes(n.status));
+    if (!due.length) return;
+    new Notification('Rokovi natječaja (' + due.length + ')', {body: due.slice(0, 4).map(n => n.spec + ' – ' + fmtDate(n.rok)).join('\n')});
+    S.lastNotified = todayISO(); save();
+  } catch (e) {}
+}
+
+/* ====================== Događaji ====================== */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-act]'); if (!t) return;
+  const act = t.dataset.act, id = t.dataset.id;
+  switch (act) {
+    case 'tab': e.preventDefault(); go(t.dataset.v); break;
+    case 'feed-add': { const e = inbox().find(x => x.key === t.dataset.key); if (e) feedAdd([e]); break; }
+    case 'feed-dismiss': S.feed.dismissed.push(t.dataset.key); save(); render(); break;
+    case 'feed-dismiss-all': if (confirm('Odbaciti sve prikazane natječaje iz sandučića?')) { shownInbox().forEach(e => S.feed.dismissed.push(e.key)); save(); render(); } break;
+    case 'feed-add-alarms': { const l = inbox().filter(alarmMatchEntry); if (l.length) feedAdd(l); else toast('Nema natječaja koji odgovaraju alarmima'); break; }
+    case 'feed-more': ui.inboxAll = true; render(); break;
+    case 'feed-refresh': FEED.state = 'loading'; softRender(); syncFeed(); break;
+    case 'new-nat': editNat(null); break;
+    case 'edit-nat': editNat(id); break;
+    case 'del-nat': if (confirm('Obrisati ovaj natječaj?')) { S.natjecaji = S.natjecaji.filter(x => x.id !== id); save(); closeDlg(); render(); } break;
+    case 'close-dlg': closeDlg(); break;
+    case 'add-rad': S.profile.rad.push({id: uid(), cat: 'opca', mj: '', kont: false}); save(); render(); break;
+    case 'del-rad': S.profile.rad.splice(+t.dataset.i, 1); save(); render(); break;
+    case 'new-lit': editLit(null); break;
+    case 'edit-lit': editLit(id); break;
+    case 'del-lit': if (confirm('Obrisati stavku?')) { S.lit = S.lit.filter(x => x.id !== id); save(); closeDlg(); render(); } break;
+    case 'toggle-read': { const i = S.lit.find(x => x.id === id); i.procitano = !i.procitano; save(); render(); break; }
+    case 'translate': openTranslate($('#trText').value); break;
+    case 'translate-item': openTranslate((S.lit.find(x => x.id === id) || {}).biljeska || ''); break;
+    case 'new-edu': editEdu(null); break;
+    case 'edit-edu': editEdu(id); break;
+    case 'del-edu': if (confirm('Obrisati stavku?')) { S.edu = S.edu.filter(x => x.id !== id); save(); closeDlg(); render(); } break;
+    case 'rm-aspec': S.alarms.specs.splice(+t.dataset.i, 1); save(); render(); break;
+    case 'tg-zup': { const z = t.dataset.v, k = S.alarms.zupanije.indexOf(z); if (k >= 0) S.alarms.zupanije.splice(k, 1); else S.alarms.zupanije.push(z); save(); render(); break; }
+    case 'notif': if (!('Notification' in window)) toast('Preglednik ne podržava obavijesti'); else Notification.requestPermission().then(p => { toast(p === 'granted' ? 'Obavijesti uključene' : 'Obavijesti nisu dopuštene'); checkNotifications(); }); break;
+    case 'ics': exportICS(); break;
+    case 'export': exportJSON(); break;
+    case 'import': $('#impFile').click(); break;
+    case 'reset': if (confirm('Obrisati SVE podatke? Ovo se ne može poništiti (prvo izvezi kopiju).')) { localStorage.removeItem(LS_KEY); S = defaults(); render(); toast('Podaci obrisani'); } break;
+    case 'reset-rules': if (confirm('Vratiti zadana pravila bodovanja?')) { S.rules = clone(DEFAULT_RULES); save(); render(); } break;
+  }
+});
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.dataset.actChange === 'nat-status') { const n = S.natjecaji.find(x => x.id === t.dataset.id); n.status = t.value; save(); render(); return; }
+  if (t.dataset.inboxalarm !== undefined) { ui.inboxAlarms = t.checked; render(); return; }
+  if (t.dataset.filter) { ui.f[t.dataset.filter] = t.value; render(); return; }
+  if (t.dataset.grp !== undefined) { ui.grp = t.value; render(); return; }
+  if (t.dataset.lf) { ui.lit[t.dataset.lf] = t.type === 'checkbox' ? t.checked : t.value; render(); return; }
+  if (t.dataset.eduview !== undefined) { ui.eduView = t.value; render(); return; }
+  if (t.dataset.chk) { S.checklist[t.dataset.chk] = t.checked; save(); render(); return; }
+  if (t.dataset.alarmDays !== undefined) { S.alarms.days = Math.max(0, Math.min(30, parseInt(t.value) || 0)); save(); return; }
+  if (t.name === 'ustanova' && t.hasAttribute('data-hosp') && HOSP[t.value]) { const z = t.form.elements.zupanija; if (z && !z.value) z.value = HOSP[t.value]; return; }
+  if (t.id === 'impFile') {
+    const f = t.files[0]; if (!f) return;
+    const rd = new FileReader();
+    rd.onload = () => {
+      try {
+        const j = JSON.parse(rd.result);
+        if (!j || !Array.isArray(j.natjecaji)) throw new Error('format');
+        if (!confirm('Zamijeniti trenutne podatke podacima iz kopije?')) return;
+        S = Object.assign(defaults(), j); save(); render(); toast('Kopija uvezena');
+      } catch (err) { toast('Datoteka nije ispravna kopija'); }
+    };
+    rd.readAsText(f); t.value = '';
+  }
+});
+document.addEventListener('input', e => {
+  const t = e.target;
+  if (t.dataset.filter === 'q') { ui.f.q = t.value; const pos = t.selectionStart; render(); const n = $('[data-filter=q]'); n.focus(); n.setSelectionRange(pos, pos); return; }
+  if (t.dataset.lf === 'q') { ui.lit.q = t.value; const pos = t.selectionStart; render(); const n = $('[data-lf=q]'); n.focus(); n.setSelectionRange(pos, pos); return; }
+  if (t.id === 'searchQ') { ui.searchQ = t.value; const pos = t.selectionStart; render(); const n = $('#searchQ'); n.focus(); n.setSelectionRange(pos, pos); return; }
+  if (t.dataset.p) { setPath(S.profile, t.dataset.p, t.type === 'number' || t.dataset.p === 'prosjek' ? (t.value === '' ? '' : t.value) : t.value); save(); updateCalcResult(); return; }
+  if (t.dataset.raz !== undefined) { S.profile.razgovor[+t.dataset.raz] = t.value === '' ? 0 : parseFloat(t.value) || 0; save(); updateCalcResult(); return; }
+  if (t.dataset.rad !== undefined) { const e2 = S.profile.rad[+t.dataset.rad]; e2[t.dataset.k] = t.type === 'checkbox' ? t.checked : t.value; save(); updateCalcResult(); return; }
+  if (t.dataset.rule) { const v = num(t.value); if (v != null) { setPath(S.rules, t.dataset.rule, v); save(); } return; }
+  if (t.dataset.rrule !== undefined) { S.rules.rad[+t.dataset.rrule][t.dataset.k] = num(t.value); save(); return; }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.target.id === 'alarmSpec') { e.preventDefault(); const v = e.target.value.trim(); if (v && !S.alarms.specs.includes(v)) { S.alarms.specs.push(v); save(); render(); } }
+});
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (TABS.some(t => t[0] === h) && h !== ui.tab) { ui.tab = h; render(); } });
+
+/* ====================== Start ====================== */
+(function init(){
+  const h = location.hash.slice(1); if (TABS.some(t => t[0] === h)) ui.tab = h;
+  render(); save(); checkNotifications(); syncFeed();
+  setInterval(syncFeed, 30 * 60 * 1000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && (!S.feed.lastSync || Date.now() - new Date(S.feed.lastSync) > 10 * 60 * 1000)) syncFeed(); });
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(() => {});
+  if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+})();
+</script>
+</body>
+</html>
