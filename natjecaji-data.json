@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T16:34:15Z",
+ "generated": "2026-11-23T19:43:14Z",
  "izvori": [
   "https://spec.edo.hr/",
   "https://zdravlje.gov.hr/o-ministarstvu/djelokrug-1297/kutak-za-djelatnike-u-zdravstvu/specijalisticko-usavrsavanje-za-doktore-medicine-1350/natjecaji-za-specijalizaciju-7155/7155"
@@ -20,7 +20,7 @@
    "rokProcijenjen": true,
    "rokNapomena": "",
    "parsed": false,
-   "pokusaja": 1,
+   "pokusaja": 2,
    "zupanija": "Šibensko-kninska",
    "prviPut": "2026-11-23"
   },
@@ -39,7 +39,7 @@
    "rokProcijenjen": true,
    "rokNapomena": "",
    "parsed": false,
-   "pokusaja": 1,
+   "pokusaja": 2,
    "zupanija": "Bjelovarsko-bilogorska",
    "prviPut": "2026-11-23"
   },
@@ -58,7 +58,7 @@
    "rokProcijenjen": true,
    "rokNapomena": "",
    "parsed": false,
-   "pokusaja": 1,
+   "pokusaja": 2,
    "zupanija": "Vukovarsko-srijemska",
    "prviPut": "2026-11-23"
   },
@@ -1426,7 +1426,7 @@
    "rokProcijenjen": true,
    "rokNapomena": "",
    "parsed": false,
-   "pokusaja": 1,
+   "pokusaja": 2,
    "zupanija": "Brodsko-posavska",
    "prviPut": "2026-11-23"
   },
@@ -1464,7 +1464,7 @@
    "rokProcijenjen": true,
    "rokNapomena": "",
    "parsed": false,
-   "pokusaja": 1,
+   "pokusaja": 2,
    "zupanija": "Istarska",
    "prviPut": "2026-11-23"
   },
@@ -1616,7 +1616,7 @@
    "rokProcijenjen": true,
    "rokNapomena": "",
    "parsed": false,
-   "pokusaja": 1,
+   "pokusaja": 2,
    "zupanija": "Primorsko-goranska",
    "prviPut": "2026-11-23"
   },
@@ -1654,7 +1654,7 @@
    "rokProcijenjen": true,
    "rokNapomena": "",
    "parsed": false,
-   "pokusaja": 1,
+   "pokusaja": 2,
    "zupanija": "Grad Zagreb",
    "prviPut": "2026-11-23"
   },
@@ -1692,7 +1692,7 @@
    "rokProcijenjen": true,
    "rokNapomena": "",
    "parsed": false,
-   "pokusaja": 1,
+   "pokusaja": 2,
    "zupanija": "Osječko-baranjska",
    "prviPut": "2026-11-23"
   },
