@@ -1,10 +1,29 @@
 {
- "generated": "2026-11-22T19:32:08Z",
+ "generated": "2026-11-23T07:56:37Z",
  "izvori": [
   "https://spec.edo.hr/",
   "https://zdravlje.gov.hr/o-ministarstvu/djelokrug-1297/kutak-za-djelatnike-u-zdravstvu/specijalisticko-usavrsavanje-za-doktore-medicine-1350/natjecaji-za-specijalizaciju-7155/7155"
  ],
  "natjecaji": [
+  {
+   "id": "mc3e3abfb",
+   "naslov": "LJEKARNA ŠIBENIK",
+   "ustanova": "Ljekarna šibenik",
+   "vrsta": "natjecaj",
+   "nn": "",
+   "objavljen": "2026-11-20",
+   "link": "https://zdravlje.gov.hr/UserDocsImages/2026_Specijalizacije/2026.11.20._Natjecaj_LJSI.pdf",
+   "pdf": "https://zdravlje.gov.hr/UserDocsImages/2026_Specijalizacije/2026.11.20._Natjecaj_LJSI.pdf",
+   "izvor": "zdravlje.gov.hr",
+   "specs": [],
+   "rok": "",
+   "rokProcijenjen": true,
+   "rokNapomena": "",
+   "parsed": false,
+   "pokusaja": 1,
+   "zupanija": "Šibensko-kninska",
+   "prviPut": "2026-11-23"
+  },
   {
    "id": "8426062",
    "naslov": "Gradska ljekarna Zagreb 0",
