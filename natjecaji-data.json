@@ -1,10 +1,29 @@
 {
- "generated": "2026-11-26T12:19:27Z",
+ "generated": "2026-11-26T16:43:06Z",
  "izvori": [
   "https://spec.edo.hr/",
   "https://zdravlje.gov.hr/o-ministarstvu/djelokrug-1297/kutak-za-djelatnike-u-zdravstvu/specijalisticko-usavrsavanje-za-doktore-medicine-1350/natjecaji-za-specijalizaciju-7155/7155"
  ],
  "natjecaji": [
+  {
+   "id": "8427064",
+   "naslov": "Poliklinika za rehabilitaciju slušanja i govora SUVAG, Zagreb 0",
+   "ustanova": "Poliklinika za rehabilitaciju slušanja i govora SUVAG, Zagreb 0",
+   "vrsta": "natjecaj",
+   "nn": "NN 136/2026",
+   "objavljen": "2026-11-25",
+   "link": "https://narodne-novine.nn.hr/clanci/oglasi/full/o8427064.html",
+   "pdf": "https://spec.edo.hr/eli/oglasni/2026/136/8427064/pdf",
+   "izvor": "spec.edo.hr",
+   "specs": [],
+   "rok": "",
+   "rokProcijenjen": true,
+   "rokNapomena": "",
+   "parsed": false,
+   "pokusaja": 1,
+   "zupanija": "Grad Zagreb",
+   "prviPut": "2026-11-26"
+  },
   {
    "id": "8426723",
    "naslov": "Zdravstvena ustanova Ljekarna Šibenik 0",
@@ -1504,25 +1523,6 @@
    "parsed": false,
    "pokusaja": 3,
    "zupanija": "Zadarska",
-   "prviPut": "2026-11-18"
-  },
-  {
-   "id": "8421837",
-   "naslov": "Klinički bolnički centar Sestre milosrdnice, Zagreb 0",
-   "ustanova": "Klinički bolnički centar Sestre milosrdnice, Zagreb 0",
-   "vrsta": "natjecaj",
-   "nn": "NN 100/2026",
-   "objavljen": "2026-09-09",
-   "link": "https://narodne-novine.nn.hr/clanci/oglasi/full/o8421837.html",
-   "pdf": "https://spec.edo.hr/eli/oglasni/2026/100/8421837/pdf",
-   "izvor": "spec.edo.hr",
-   "specs": [],
-   "rok": "",
-   "rokProcijenjen": true,
-   "rokNapomena": "",
-   "parsed": false,
-   "pokusaja": 3,
-   "zupanija": "Grad Zagreb",
    "prviPut": "2026-11-18"
   },
   {
